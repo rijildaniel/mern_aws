@@ -1,0 +1,21 @@
+service: rest-api-for-grocery
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  timeout: 10
+  stage: production
+  region: ap-south-1
+  environment:
+    DATABASENAME: grocerystore
+    USER: admin
+    PASSWORD: mysql123
+    HOST: grocery.cgxefe29mdtw.ap-south-1.rds.amazonaws.com
+
+functions:
+  api:
+    handler: lambda.universal
+    events:
+      - http: ANY {proxy+}
+      - http: ANY /
